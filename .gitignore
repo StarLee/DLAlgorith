@@ -1,0 +1,7 @@
+/target
+
+*.prefs
+*.project
+*.class
+.settins
+*.classpath
