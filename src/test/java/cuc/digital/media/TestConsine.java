@@ -17,19 +17,20 @@ import cuc.digital.media.algorith.Cosine;
 import cuc.digital.media.algorith.Kmeans;
 import cuc.digital.media.algorith.Record;
 import cuc.digital.media.algorith.RecordMeta;
+import cuc.digital.support.Path;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class TestConsine {
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testPath()
 	{
-		
-		System.out.println(Cosine.class.getResource("/"));
+		System.out.println(Path.getApplicationPath(""));
 	}
 	
 	@Test
+	//@Ignore
 	public void testCosine() throws IOException
 	{
 		//String re_one="1;0.24;1.0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0";
@@ -42,7 +43,7 @@ public class TestConsine {
 				//System.out.println(cosine.getCosine(cosine.str2Record(re_one).getVector(), cosine.str2Record(re_two).getVector()));
 				
 				//String path=Cosine.class.getResource("/").toString()+"/../classes/data/StaticInfo.txt";
-				String path="/home/starlee/workspace/algorith/target/classes/data/StaticInfo.txt";
+				String path=Path.getApplicationPath("/data/StaticInfo.txt");
 				File file=new File(path);
 				BufferedReader ra=new BufferedReader(new FileReader(file));
 				List<Record> records=new ArrayList<Record>();
