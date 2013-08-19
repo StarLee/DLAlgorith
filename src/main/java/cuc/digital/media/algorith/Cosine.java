@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cuc.digital.bean.Record;
+
 public class Cosine {
 	public double getCosine(double[] item_one,double[] item_two)
 	{

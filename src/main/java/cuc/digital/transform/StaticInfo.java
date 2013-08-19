@@ -12,6 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import cuc.digital.support.Path;
+/**
+ * 将数据保存到数据库
+ * @author starlee
+ *
+ */
 public class StaticInfo {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -19,7 +25,7 @@ public class StaticInfo {
 		PreparedStatement  stmt=connection.prepareStatement("select * from ml_users");
 		stmt.execute();
 		ResultSet rs=stmt.getResultSet();
-		File file=new File("D://StaticInfo.txt");
+		File file=new File(Path.getApplicationPath("/data/StaticInfo.txt"));
 		file.createNewFile();
 		FileWriter writer=new FileWriter(file);
 		writer.append(new StaticInfoBean(0,0.0,"M","title").toString());

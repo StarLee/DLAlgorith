@@ -1,4 +1,4 @@
-package cuc.digital.media.algorith;
+package cuc.digital.bean;
 
 public class RecordMeta {
 	private int records;// 记录有多少条

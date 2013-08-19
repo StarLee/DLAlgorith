@@ -5,19 +5,27 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
+import cuc.digital.bean.ClusterFeature;
+import cuc.digital.bean.Feature;
+import cuc.digital.bean.Record;
+import cuc.digital.bean.RecordMeta;
 import cuc.digital.media.algorith.Cosine;
 import cuc.digital.media.algorith.Kmeans;
-import cuc.digital.media.algorith.Record;
-import cuc.digital.media.algorith.RecordMeta;
 import cuc.digital.support.Path;
+import cuc.digital.transform.CollectClusterFeature;
 
 @RunWith(BlockJUnit4ClassRunner.class)
 public class TestConsine {
@@ -64,8 +72,43 @@ public class TestConsine {
 				means.doRun();
 				
 				List<Record>[] all=means.getResult();
-				Iterator<Record> reit=all[0].iterator();//以下只是测试结果
-				while(reit.hasNext())
+				
+				
+				List<Record> firstCluster=all[0];
+				int size=firstCluster.size();
+				CollectClusterFeature feature=new CollectClusterFeature();
+				feature.collect(firstCluster);
+				
+				Map<String, Feature> map=feature.getMap_feature();
+				Set<Entry<String, Feature>> set=map.entrySet();
+				List<ClusterFeature> clusterFeatureList=new ArrayList<ClusterFeature>();
+				for(Entry<String, Feature> entry:set)
+				{
+					String key=entry.getKey();
+					Feature features=entry.getValue();
+					ClusterFeature f=new ClusterFeature();
+					f.setName(key);
+					f.setWeight(features.getAmount()/size);
+					//System.out.println(key+":"+features.getAmount()/size+":"+features.getRating()/features.getAmount());
+					clusterFeatureList.add(f);
+				}
+				Collections.sort(clusterFeatureList,new Comparator<ClusterFeature>(){
+
+					@Override
+					public int compare(ClusterFeature o1, ClusterFeature o2) {
+						if(o1.getWeight()>o2.getWeight())
+							return 1;
+						else
+							if(o1.getWeight()<o2.getWeight())
+								return -1;
+						return 0;
+					}});
+				//输出结果
+				for(ClusterFeature cf:clusterFeatureList)
+				{
+					System.out.println(cf.getName()+":"+cf.getWeight());
+				}
+				/*while(reit.hasNext())
 				{
 					Record re=reit.next();
 					System.out.print(re.getId()+"(");
@@ -74,6 +117,6 @@ public class TestConsine {
 						System.out.print(re.getVector()[i]+";");
 					}
 					System.out.println(")");
-				}
+				}*/
 	}
 }

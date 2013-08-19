@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import cuc.digital.bean.Record;
+import cuc.digital.bean.RecordMeta;
+
 public class Kmeans {
 	private int k;// 聚类中心
 	private List<Record> records;// 记录集

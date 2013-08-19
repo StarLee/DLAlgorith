@@ -1,4 +1,4 @@
-package cuc.digital.media.algorith;
+package cuc.digital.bean;
 
 public class Record {
 	private int id;
