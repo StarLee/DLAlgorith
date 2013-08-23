@@ -11,7 +11,7 @@ import java.util.List;
 import cuc.digital.bean.RateRecord;
 
 public class CollectClusterItem {
-	private static CollectClusterItem collect = new CollectClusterItem();
+	private static CollectClusterItem collect;
 	private Connection connection;
 
 	private CollectClusterItem() {
@@ -25,7 +25,7 @@ public class CollectClusterItem {
 	}
 
 	public static CollectClusterItem getInstance() {
-		return collect;
+		return collect = new CollectClusterItem();
 	}
 
 	public void setup() throws ClassNotFoundException, SQLException {

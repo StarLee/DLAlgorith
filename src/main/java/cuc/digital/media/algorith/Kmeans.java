@@ -16,13 +16,18 @@ public class Kmeans {
 	private List<Record>[] result;// 返回的结果
 	private RecordMeta meta;// 关于记录的元数据信息
 	private Cosine cosine = new Cosine();
-	Record[] centroid;// 中心点
+	private Record[] centroid;// 中心点
 	public Kmeans() {
 		this.initial = false;
 		this.finish = false;
 		
 	}
 
+	public Record[] getCentoids()
+	{
+		return centroid;
+	}
+	
 	public List<Record>[] getResult() {
 		return result;
 	}
